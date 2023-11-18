@@ -5,14 +5,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79e08bd0-3e4c-41fc-8ba6-724a750e2d1f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/Searcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ro-stop-words.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/CustomAnalyzer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/CustomRomanianAnalyzer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_c.cfe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_c.cfs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_c.si" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_d.fdm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_d.fdt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_d.fdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_d.fnm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_d.nvd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_d.nvm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_d.si" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_d_Lucene90_0.doc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_d_Lucene90_0.pos" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_d_Lucene90_0.tim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_d_Lucene90_0.tip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_d_Lucene90_0.tmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_e.cfe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_e.cfs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_e.si" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_f.cfe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_f.cfs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_f.si" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_g.cfe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_g.cfs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_g.si" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/segments_f" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/Indexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Indexer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Searcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Searcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/Indexer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/Indexer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/Searcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/Searcher.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,29 +69,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/Master/An 2/Semestul 1/IRTM/lucene-9.8.0/lucene-9.8.0/modules/lucene-analysis-common-9.8.0.jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Master/An 2/Semestul 1/IRTM/lucene-9.8.0/lucene-9.8.0/modules/lucene-analysis-common-9.8.0.jar&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Indexer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Indexer.Indexer" />
@@ -101,7 +129,9 @@
       <option name="presentableId" value="Default" />
       <updated>1699477103782</updated>
       <workItem from="1699477104832" duration="18132000" />
-      <workItem from="1699717464511" duration="3667000" />
+      <workItem from="1699717464511" duration="3706000" />
+      <workItem from="1699790498136" duration="13422000" />
+      <workItem from="1700170033296" duration="9702000" />
     </task>
     <servers />
   </component>

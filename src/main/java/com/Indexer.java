@@ -1,6 +1,7 @@
 package com;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.ro.RomanianAnalyzer;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
@@ -13,6 +14,11 @@ import java.io.IOException;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StringField;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+import org.apache.lucene.analysis.TokenStream;
+import java.io.FileReader;
+
 import org.apache.lucene.document.TextField;
 
 import org.apache.lucene.store.FSDirectory;
@@ -24,14 +30,11 @@ import org.apache.tika.parser.Parser;
 import org.apache.tika.sax.BodyContentHandler;
 import org.xml.sax.SAXException;
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
-import org.apache.lucene.store.FSDirectory;
 
+import com.CustomAnalyzer;
 
-//TODO: make romanian analyzer work
-//TODO: Stem, remove diacritics and clean stopwords
-//TODO: Add a GenerateIndex method
-//TODO: Make a cli (in main??)
 @SuppressWarnings({
         "serial", "deprecation",
         "rawtypes", "unchecked"})
@@ -54,14 +57,18 @@ public class Indexer {
         System.out.println("Directory is valid, indexing files");
         File[] files = directory_src.listFiles();
 
-        StandardAnalyzer analyzer = new StandardAnalyzer();
-        Directory index = new ByteBuffersDirectory();
+//        RomanianAnalyzer analyzer = new RomanianAnalyzer();
+        CustomAnalyzer analyzer = new CustomAnalyzer();
+//        Directory index = new ByteBuffersDirectory();
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
         IndexWriter w = new IndexWriter(idx_directory, config);
 
         for(File file : files){
             w = AddDocumentToIndex(w, file);
         }
+
+//        System.out.println(new RomanianAnalyzer().getStopwordSet());
+
         w.commit();
         w.close();
 
@@ -75,6 +82,9 @@ public class Indexer {
 
         doc.add(new TextField("original_content",  x, Field.Store.YES));
         w.addDocument(doc);
+
+        if (file.toString().equals("dataset\\mirceacelbatran")){ printAnalyzedContents(new CustomAnalyzer(), file);}
+
         return w;
     }
 
@@ -92,7 +102,43 @@ public class Indexer {
                 e.printStackTrace();
             }
         }
-        return handler.toString();
+        String result = handler.toString();
+        result = ConvertToUTF8(result);
+        return result;
+    }
+
+    private static String ConvertToUTF8(String input) {
+        byte[] originalBytes = input.getBytes(StandardCharsets.UTF_8);
+        String originalString = new String(originalBytes, StandardCharsets.UTF_8);
+
+        if (originalString.equals(input)) {
+            return input;
+        }
+
+        return new String(input.getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
+    }
+
+    private static void printAnalyzedContents(Analyzer analyzer, File file) throws IOException {
+        TokenStream tokenStream = analyzer.tokenStream("contents", new FileReader(file));
+
+        CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
+
+        System.out.println("Analyzed contents for file: " + file.getName());
+        try {
+            tokenStream.reset();
+            Integer x = 0;
+            while (tokenStream.incrementToken()) {
+                System.out.print(charTermAttribute.toString() + " ");
+                if (++x > 20){
+                    System.out.println("");
+                    x = 0;
+                }
+            }
+            tokenStream.end();
+        } finally {
+            tokenStream.close();
+        }
+        System.out.println("\n------------------------------");
     }
 
 

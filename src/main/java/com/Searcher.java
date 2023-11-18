@@ -47,20 +47,32 @@ import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.io.IOException;
 
+import com.CustomAnalyzer;
+
 public class Searcher {
     private Path indexPath;
+    private Directory directory;
+    private IndexReader reader;
+    private CustomAnalyzer analyzer;
+    private IndexSearcher searcher;
+    private QueryParser queryParser;
+
     public Searcher() throws Exception{
         this("index/");
     }
     public Searcher(String indexPath) throws Exception{
+
         this.indexPath = Paths.get(indexPath);
 
-        Directory directory = FSDirectory.open(this.indexPath);
-        IndexReader reader = DirectoryReader.open(directory);
-//        IndexReader reader = DirectoryReader.open(FSDirectory.open(Paths.get(indexPath)));
+        this.directory = FSDirectory.open(this.indexPath);
+        this.reader = DirectoryReader.open(this.directory);
+
+        this.analyzer = new CustomAnalyzer();
 
 
-        IndexSearcher searcher = new IndexSearcher(reader);
+        this.searcher = new IndexSearcher(this.reader);
+        this.queryParser = new QueryParser("original_content", this.analyzer);
+
 
 //        this.searchField = "original_content";
 //
@@ -69,8 +81,17 @@ public class Searcher {
 
     }
 
-    public void search(String query){
+    public void search(String input_query) throws ParseException, IOException{
+        Query query = this.queryParser.parse(input_query);
+        TopDocs topDocs = this.searcher.search(query, 3);
 
+        ScoreDoc[] hits = topDocs.scoreDocs;
+        for (ScoreDoc hit : hits) {
+            int docId = hit.doc;
+            Document document = searcher.doc(docId);
+            // Process the document as needed
+            System.out.println("Document: " + document.get("original_content") + ", Score: " + hit.score);
+        }
     }
 
 }
