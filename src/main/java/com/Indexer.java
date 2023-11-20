@@ -3,9 +3,9 @@ package com;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.ro.RomanianAnalyzer;
 import org.apache.lucene.document.Field;
-import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.index.*;
 import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.store.ByteBuffersDirectory;
 import org.apache.lucene.store.Directory;
 import java.io.FileInputStream;
@@ -19,6 +19,19 @@ import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.TokenStream;
 import java.io.FileReader;
 
+import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
+import org.apache.lucene.document.StringField;
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.Query;
+import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.TopDocs;
+
+
 import org.apache.lucene.document.TextField;
 
 import org.apache.lucene.store.FSDirectory;
@@ -31,9 +44,12 @@ import org.apache.tika.sax.BodyContentHandler;
 import org.xml.sax.SAXException;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.EnumSet;
+import java.util.UUID;
 import java.nio.file.Paths;
 
-import com.CustomAnalyzer;
 
 @SuppressWarnings({
         "serial", "deprecation",
@@ -44,6 +60,18 @@ public class Indexer {
         CreateIndex("dataset", "index");
     }
     public static void CreateIndex(String path, String index_path) throws IOException, ParseException {
+
+        if(path == null){
+            System.out.println("Source files path can't be null. Changing to default path `dataset`");
+            path = "dataset";
+        }
+
+        if(index_path == null){
+            System.out.println("Index path can't be null. Changing to default path `index`");
+            index_path = "index";
+        }
+        clearIndexDirectory(Paths.get(index_path));
+
         System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tF %1$tT] [%4$-7s] %5$s %n");
         System.getProperties().put("org.apache.commons.logging.simplelog.defaultlog","fatal");
 
@@ -57,36 +85,47 @@ public class Indexer {
         System.out.println("Directory is valid, indexing files");
         File[] files = directory_src.listFiles();
 
-//        RomanianAnalyzer analyzer = new RomanianAnalyzer();
         CustomAnalyzer analyzer = new CustomAnalyzer();
-//        Directory index = new ByteBuffersDirectory();
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
         IndexWriter w = new IndexWriter(idx_directory, config);
 
         for(File file : files){
             w = AddDocumentToIndex(w, file);
         }
-
-//        System.out.println(new RomanianAnalyzer().getStopwordSet());
-
         w.commit();
         w.close();
+    }
+
+
+    private static void clearIndexDirectory(Path directoryPath) throws IOException{
+        EnumSet<FileVisitOption> options = EnumSet.noneOf(FileVisitOption.class);
+        Files.walkFileTree(directoryPath, options, Integer.MAX_VALUE, new SimpleFileVisitor<Path>(){
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException{
+                Files.delete(file);
+                return FileVisitResult.CONTINUE;
+            }
+        });
 
     }
 
-    private static IndexWriter AddDocumentToIndex(IndexWriter w, File file) throws IOException {
-        System.out.println("Adding file " + file + " to index from private method.");
-        String x = ReadDocument(file);
+
+    private static IndexWriter AddDocumentToIndex(IndexWriter w, File file) throws IOException{
+        System.out.println("Adding file " + file.getName() + " to index.");
+        String uuid = UUID.randomUUID().toString();
+
+        String doc_name = file.getName().replaceFirst("[.][^.]+$", "");
+        String doc_contents = ReadDocument(file);
 
         Document doc = new Document();
-
-        doc.add(new TextField("original_content",  x, Field.Store.YES));
+        doc.add(new TextField("original_content",  doc_contents, Field.Store.YES));
+        doc.add(new StringField("doc_name", doc_name, Field.Store.YES));
+        doc.add(new StringField("uuid", uuid, Field.Store.YES));
         w.addDocument(doc);
-
-        if (file.toString().equals("dataset\\mirceacelbatran")){ printAnalyzedContents(new CustomAnalyzer(), file);}
 
         return w;
     }
+
 
     private static String ReadDocument(File file){
         Parser parser = new AutoDetectParser();
@@ -95,7 +134,6 @@ public class Indexer {
         ParseContext context = new ParseContext();
 
         try (FileInputStream inputStream = new FileInputStream(file)) {
-            // Parse the DOCX document
             parser.parse(inputStream, handler, metadata, context);
         } catch (IOException | TikaException | SAXException e) {
             if (!e.toString().contains("org.apache.tika.parser.pdf.PDFParser")) {
@@ -138,8 +176,9 @@ public class Indexer {
         } finally {
             tokenStream.close();
         }
-        System.out.println("\n------------------------------");
+
     }
+
 
 
 }

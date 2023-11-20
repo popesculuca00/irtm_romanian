@@ -1,4 +1,5 @@
 package com;
+import com.uwyn.jhighlight.fastutil.Hash;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -56,6 +57,7 @@ public class Searcher {
     private CustomAnalyzer analyzer;
     private IndexSearcher searcher;
     private QueryParser queryParser;
+    private Set<String> resultHist;
 
     public Searcher() throws Exception{
         this("index/");
@@ -73,6 +75,7 @@ public class Searcher {
         this.searcher = new IndexSearcher(this.reader);
         this.queryParser = new QueryParser("original_content", this.analyzer);
 
+        this.resultHist = new HashSet<>();
 
 //        this.searchField = "original_content";
 //
@@ -83,15 +86,54 @@ public class Searcher {
 
     public void search(String input_query) throws ParseException, IOException{
         Query query = this.queryParser.parse(input_query);
-        TopDocs topDocs = this.searcher.search(query, 3);
+        TopDocs topDocs = this.searcher.search(query, 100);
+        this.resultHist.clear();
 
         ScoreDoc[] hits = topDocs.scoreDocs;
         for (ScoreDoc hit : hits) {
-            int docId = hit.doc;
-            Document document = searcher.doc(docId);
-            // Process the document as needed
-            System.out.println("Document: " + document.get("original_content") + ", Score: " + hit.score);
+            this.resultHist.forEach(uuid -> System.out.print( "<" + uuid + ">    "));
+            displayResult(hit);
         }
+
+
+    }
+
+
+    public void displayResult(ScoreDoc hit) throws IOException{
+        int docId = hit.doc;
+        Document document = this.searcher.doc(docId);
+
+        String cnt_uuid = document.get("uuid");
+
+        if (!this.resultHist.contains(cnt_uuid)) {
+
+            this.resultHist.add(cnt_uuid);
+
+            System.out.println("\n------------------------------------------------------");
+            System.out.println("Document name: " + document.get("doc_name"));
+            System.out.println("Search score: " + hit.score);
+            System.out.println("Document contents: ");
+
+            String formatted_content = formatResult(document.get("original_content"));
+
+            System.out.println(formatted_content);
+        }
+
+    }
+
+    public static String formatResult(String text){
+        String[] works = text.replace("\n", " ").split(" ");
+        StringBuilder line = new StringBuilder();
+        StringBuilder result = new StringBuilder();
+        for (String work : works) {
+            if (line.length() + work.length() > 200) {
+                result.append(line).append("\n");
+                line = new StringBuilder();
+            }
+            line.append(work).append(" ");
+        }
+        result.append(line);
+        return result.toString();
     }
 
 }

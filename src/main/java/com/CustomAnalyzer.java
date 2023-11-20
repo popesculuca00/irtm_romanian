@@ -82,17 +82,17 @@ public class CustomAnalyzer extends Analyzer {
         return stops;
     }
 
-
-    private static String ConvertToUTF8(String input) {
-        byte[] originalBytes = input.getBytes(StandardCharsets.UTF_8);
-        String originalString = new String(originalBytes, StandardCharsets.UTF_8);
-
-        if (originalString.equals(input)) {
-            return input;
-        }
-
-        return new String(input.getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
-    }
+//
+//    private static String ConvertToUTF8(String input) {
+//        byte[] originalBytes = input.getBytes(StandardCharsets.UTF_8);
+//        String originalString = new String(originalBytes, StandardCharsets.UTF_8);
+//
+//        if (originalString.equals(input)) {
+//            return input;
+//        }
+//
+//        return new String(input.getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
+//    }
 
 
     private class DiacriticRemovalFilter extends TokenFilter {
