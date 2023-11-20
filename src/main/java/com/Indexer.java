@@ -1,39 +1,16 @@
 package com;
 
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.analysis.ro.RomanianAnalyzer;
-import org.apache.lucene.document.Field;
-import org.apache.lucene.index.*;
-import org.apache.lucene.queryparser.classic.ParseException;
-import org.apache.lucene.queryparser.classic.QueryParser;
-import org.apache.lucene.store.ByteBuffersDirectory;
-import org.apache.lucene.store.Directory;
-import java.io.FileInputStream;
-import java.io.IOException;
-
-import org.apache.lucene.document.Document;
-import org.apache.lucene.document.Field;
-import org.apache.lucene.document.StringField;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.TokenStream;
-import java.io.FileReader;
-
-import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StringField;
+import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
-import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.Query;
-import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.TopDocs;
-
-
-import org.apache.lucene.document.TextField;
-
+import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
@@ -42,13 +19,16 @@ import org.apache.tika.parser.ParseContext;
 import org.apache.tika.parser.Parser;
 import org.apache.tika.sax.BodyContentHandler;
 import org.xml.sax.SAXException;
+
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.EnumSet;
 import java.util.UUID;
-import java.nio.file.Paths;
 
 
 @SuppressWarnings({
@@ -60,6 +40,8 @@ public class Indexer {
         CreateIndex("dataset", "index");
     }
     public static void CreateIndex(String path, String index_path) throws IOException, ParseException {
+        System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tF %1$tT] [%4$-7s] %5$s %n");
+        System.getProperties().put("org.apache.commons.logging.simplelog.defaultlog","fatal");
 
         if(path == null){
             System.out.println("Source files path can't be null. Changing to default path `dataset`");
@@ -70,13 +52,12 @@ public class Indexer {
             System.out.println("Index path can't be null. Changing to default path `index`");
             index_path = "index";
         }
-        clearIndexDirectory(Paths.get(index_path));
 
-        System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tF %1$tT] [%4$-7s] %5$s %n");
-        System.getProperties().put("org.apache.commons.logging.simplelog.defaultlog","fatal");
+        Path indexPathObject = Paths.get(index_path);
+        clearIndexDirectory(indexPathObject);
 
         File directory_src = new File(path);
-        Directory idx_directory = FSDirectory.open(Paths.get(index_path));
+        Directory idx_directory = FSDirectory.open(indexPathObject);
 
         if(!directory_src.isDirectory()){
             System.out.println("Directory " + directory_src + " is not a valid directory");
@@ -106,7 +87,6 @@ public class Indexer {
                 return FileVisitResult.CONTINUE;
             }
         });
-
     }
 
 
@@ -155,30 +135,4 @@ public class Indexer {
 
         return new String(input.getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
     }
-
-    private static void printAnalyzedContents(Analyzer analyzer, File file) throws IOException {
-        TokenStream tokenStream = analyzer.tokenStream("contents", new FileReader(file));
-
-        CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
-
-        System.out.println("Analyzed contents for file: " + file.getName());
-        try {
-            tokenStream.reset();
-            Integer x = 0;
-            while (tokenStream.incrementToken()) {
-                System.out.print(charTermAttribute.toString() + " ");
-                if (++x > 20){
-                    System.out.println("");
-                    x = 0;
-                }
-            }
-            tokenStream.end();
-        } finally {
-            tokenStream.close();
-        }
-
-    }
-
-
-
 }

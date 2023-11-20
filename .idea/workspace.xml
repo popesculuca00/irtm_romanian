@@ -6,62 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="79e08bd0-3e4c-41fc-8ba6-724a750e2d1f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_10.cfe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_10.cfs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_10.si" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_11.cfe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_11.cfs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_11.si" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_12.cfe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_12.cfs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_12.si" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_13.cfe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_13.cfs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_13.si" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_l.fdm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_l.fdt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_l.fdx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_l.fnm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_l.nvd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_l.nvm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_l.si" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_l_Lucene90_0.doc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_l_Lucene90_0.pos" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_l_Lucene90_0.tim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_l_Lucene90_0.tip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_l_Lucene90_0.tmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_v.fdm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_v.fdt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_v.fdx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_v.fnm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_v.nvd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_v.nvm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_v.si" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_v_Lucene90_0.doc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_v_Lucene90_0.pos" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_v_Lucene90_0.tim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_v_Lucene90_0.tip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_v_Lucene90_0.tmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_w.cfe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_w.cfs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_w.si" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_x.cfe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_x.cfs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_x.si" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_y.cfe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_y.cfs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_y.si" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_z.cfe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_z.cfs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/_z.si" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index/segments_14" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_0.cfe" beforeDir="false" afterPath="$PROJECT_DIR$/index/_0.cfe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_0.cfs" beforeDir="false" afterPath="$PROJECT_DIR$/index/_0.cfs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/_0.si" beforeDir="false" afterPath="$PROJECT_DIR$/index/_0.si" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index/segments_1" beforeDir="false" afterPath="$PROJECT_DIR$/index/segments_1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/CustomAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CustomAnalyzer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/Indexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Indexer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/Searcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Searcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/CustomAnalyzer$DiacriticRemovalFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/CustomAnalyzer$DiacriticRemovalFilter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/CustomAnalyzer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/CustomAnalyzer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/Indexer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/Indexer$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/Indexer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/Indexer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/Searcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/Searcher.class" afterDir="false" />
     </list>
@@ -132,7 +88,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Popescu_Luca_Project1" />
-      <option name="PROGRAM_PARAMETERS" value="-search &quot;România&quot; -index " />
+      <option name="PROGRAM_PARAMETERS" value="-search &quot;România&quot; -n 2 -index " />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -166,7 +122,7 @@
       <workItem from="1699477104832" duration="18132000" />
       <workItem from="1699717464511" duration="3706000" />
       <workItem from="1699790498136" duration="13422000" />
-      <workItem from="1700170033296" duration="28725000" />
+      <workItem from="1700170033296" duration="30887000" />
     </task>
     <servers />
   </component>

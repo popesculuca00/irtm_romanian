@@ -1,66 +1,40 @@
 package com;
 
 
-import java.io.File;
-import java.io.IOException;
-import java.io.StringReader;
-
-import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.CharArraySet;
-import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.Tokenizer;
+import com.ibm.icu.text.Transliterator;
+import org.apache.lucene.analysis.*;
 import org.apache.lucene.analysis.core.LowerCaseFilter;
 import org.apache.lucene.analysis.core.StopFilter;
-import org.apache.lucene.analysis.ro.RomanianAnalyzer;
 import org.apache.lucene.analysis.snowball.SnowballFilter;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
-import org.apache.commons.io.FileUtils;
-
-
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
-import org.apache.lucene.analysis.TokenFilter;
-import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
-import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
-import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
 
-import com.ibm.icu.text.Transliterator;
-
-import java.nio.charset.StandardCharsets;
-import java.text.Normalizer;
+import java.io.IOException;
 import java.util.Set;
-import java.util.ArrayList;
-import java.util.List;
 public class CustomAnalyzer extends Analyzer {
     private final CharArraySet customStopWords;
-
     private final Transliterator transliterator = Transliterator.getInstance("NFD; [:Nonspacing Mark:] Remove; NFC");
 
-    public CustomAnalyzer() throws IOException{
-        this("ro-stop-words.txt");
-    }
-    public CustomAnalyzer(String roStopWordsPath) throws IOException{
 
+    public CustomAnalyzer(){
         this.customStopWords = getCustomStopWords();
-
     }
 
 
     @Override
     protected TokenStreamComponents createComponents(String fieldName){
-
         Tokenizer source = new StandardTokenizer();
-        TokenStream lowerCased = new LowerCaseFilter(source);
+        TokenStream processedField = new LowerCaseFilter(source);
 
-        lowerCased = new StopFilter(lowerCased, this.customStopWords);
+        processedField = new StopFilter(processedField, this.customStopWords);
+        processedField = new SnowballFilter(processedField, "Romanian");
 
-        TokenStream finalStream = new SnowballFilter(lowerCased, "Romanian");
-
-        finalStream = new DiacriticRemovalFilter(finalStream);
-
+        TokenStream finalStream = new DiacriticRemovalFilter(processedField);
         return new TokenStreamComponents(source, finalStream);
 
     }
 
+    
     public static CharArraySet getCustomStopWords(){
         CharArraySet stops = new CharArraySet(Set.of(
                 "a", "abia", "acea", "aceasta", "această", "aceea", "aceeasi", "aceeași", "acei", "aceia", "acel", "acela", "acelasi", "același", "acele", "acelea", "acest", "acesta", "aceste", "acestea", "acestei", "acestia", "acestui", "acești", "aceștia", "acolo", "acord", "acum", "adica", "adică",
@@ -82,40 +56,21 @@ public class CustomAnalyzer extends Analyzer {
         return stops;
     }
 
-//
-//    private static String ConvertToUTF8(String input) {
-//        byte[] originalBytes = input.getBytes(StandardCharsets.UTF_8);
-//        String originalString = new String(originalBytes, StandardCharsets.UTF_8);
-//
-//        if (originalString.equals(input)) {
-//            return input;
-//        }
-//
-//        return new String(input.getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
-//    }
-
-
+    
     private class DiacriticRemovalFilter extends TokenFilter {
-
         private final CharTermAttribute charTermAttribute = addAttribute(CharTermAttribute.class);
 
         protected DiacriticRemovalFilter(TokenStream input) {
             super(input);
         }
-
+        
         @Override
         public boolean incrementToken() throws IOException {
             if (input.incrementToken()) {
-                // Get the current token
                 String originalToken = charTermAttribute.toString();
-
-                // Remove diacritics using transliteration
                 String tokenWithoutDiacritics = transliterator.transliterate(originalToken);
-
-                // Update the token in the attribute
                 charTermAttribute.setEmpty();
                 charTermAttribute.append(tokenWithoutDiacritics);
-
                 return true;
             } else {
                 return false;
