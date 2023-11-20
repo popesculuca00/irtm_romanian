@@ -10,6 +10,7 @@
       <change beforePath="$PROJECT_DIR$/index/_0.cfs" beforeDir="false" afterPath="$PROJECT_DIR$/index/_0.cfs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index/_0.si" beforeDir="false" afterPath="$PROJECT_DIR$/index/_0.si" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index/segments_1" beforeDir="false" afterPath="$PROJECT_DIR$/index/segments_1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ro-stop-words.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/CustomAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CustomAnalyzer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/Indexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Indexer.java" afterDir="false" />
@@ -122,7 +123,7 @@
       <workItem from="1699477104832" duration="18132000" />
       <workItem from="1699717464511" duration="3706000" />
       <workItem from="1699790498136" duration="13422000" />
-      <workItem from="1700170033296" duration="30887000" />
+      <workItem from="1700170033296" duration="31416000" />
     </task>
     <servers />
   </component>

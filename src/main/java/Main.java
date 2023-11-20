@@ -38,7 +38,7 @@ public class Main {
 
             if(cmd.hasOption("index")){
                 String filesToIndexPath = cmd.getOptionValue("index");
-                Indexer.CreateIndex(filesToIndexPath, "index");
+                Indexer.createIndex(filesToIndexPath, "index");
             }
 
             if(cmd.hasOption("search")){

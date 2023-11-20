@@ -59,34 +59,34 @@ public class Searcher {
         Document document = this.searcher.doc(docId);
 
         String cnt_uuid = document.get("uuid");
-
+        System.out.println("\n------------------------------------------------------");
         if (!this.resultHist.contains(cnt_uuid)) {
             this.resultHist.add(cnt_uuid);
-            System.out.println("\n------------------------------------------------------");
             System.out.println("Document name: " + document.get("doc_name"));
             System.out.println("Search score: " + hit.score);
             System.out.println("Document contents: ");
 
             String formatted_content = formatResult(document.get("original_content"));
-
             System.out.println(formatted_content);
+            System.out.println("------------------------------------------------------\n");
+
         }
 
     }
 
 
     public static String formatResult(String text){
-        String[] works = text.replace("\n", " ").split(" ");
-        StringBuilder line = new StringBuilder();
-        StringBuilder result = new StringBuilder();
-        for (String work : works) {
-            if (line.length() + work.length() > 200) {
-                result.append(line).append("\n");
-                line = new StringBuilder();
+        String[] inpStr = text.replace("\n", " ").split(" ");
+        StringBuilder ln = new StringBuilder();
+        StringBuilder res = new StringBuilder();
+        for (String work : inpStr) {
+            if (ln.length() + work.length() > 200) {
+                res.append(ln).append("\n");
+                ln = new StringBuilder();
             }
-            line.append(work).append(" ");
+            ln.append(work).append(" ");
         }
-        result.append(line);
-        return result.toString();
+        res.append(ln);
+        return res.toString();
     }
 }

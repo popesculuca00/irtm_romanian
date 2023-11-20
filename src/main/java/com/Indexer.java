@@ -1,8 +1,5 @@
 package com;
 
-import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StringField;
@@ -22,7 +19,6 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
@@ -36,10 +32,10 @@ import java.util.UUID;
         "rawtypes", "unchecked"})
 public class Indexer {
 
-    public static void CreateIndex() throws IOException, ParseException {
-        CreateIndex("dataset", "index");
+    public static void createIndex() throws IOException, ParseException {
+        createIndex("dataset", "index");
     }
-    public static void CreateIndex(String path, String index_path) throws IOException, ParseException {
+    public static void createIndex(String path, String index_path) throws IOException, ParseException {
         System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tF %1$tT] [%4$-7s] %5$s %n");
         System.getProperties().put("org.apache.commons.logging.simplelog.defaultlog","fatal");
 
@@ -71,7 +67,7 @@ public class Indexer {
         IndexWriter w = new IndexWriter(idx_directory, config);
 
         for(File file : files){
-            w = AddDocumentToIndex(w, file);
+            w = addDocumentToIndex(w, file);
         }
         w.commit();
         w.close();
@@ -90,12 +86,12 @@ public class Indexer {
     }
 
 
-    private static IndexWriter AddDocumentToIndex(IndexWriter w, File file) throws IOException{
+    private static IndexWriter addDocumentToIndex(IndexWriter w, File file) throws IOException{
         System.out.println("Adding file " + file.getName() + " to index.");
         String uuid = UUID.randomUUID().toString();
 
         String doc_name = file.getName().replaceFirst("[.][^.]+$", "");
-        String doc_contents = ReadDocument(file);
+        String doc_contents = readDocument(file);
 
         Document doc = new Document();
         doc.add(new TextField("original_content",  doc_contents, Field.Store.YES));
@@ -107,7 +103,7 @@ public class Indexer {
     }
 
 
-    private static String ReadDocument(File file){
+    private static String readDocument(File file){
         Parser parser = new AutoDetectParser();
         BodyContentHandler handler = new BodyContentHandler();
         Metadata metadata = new Metadata();
@@ -121,11 +117,11 @@ public class Indexer {
             }
         }
         String result = handler.toString();
-        result = ConvertToUTF8(result);
+        result = convertToUTF8(result);
         return result;
     }
 
-    private static String ConvertToUTF8(String input) {
+    private static String convertToUTF8(String input) {
         byte[] originalBytes = input.getBytes(StandardCharsets.UTF_8);
         String originalString = new String(originalBytes, StandardCharsets.UTF_8);
 
