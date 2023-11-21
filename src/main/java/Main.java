@@ -26,14 +26,26 @@ public class Main {
                 .build();
         options.addOption(searchNumOption);
 
+        Option indexPathOption = Option.builder("indexlocation")
+                .hasArg()
+                .desc("Location of already created index to be searched through")
+                .build();
+        options.addOption(indexPathOption);
+
         CommandLineParser parser = new DefaultParser();
 
+        String indexPath = "index/";
         Integer n = 3;
+
         try{
             CommandLine cmd = parser.parse(options, args);
 
             if(cmd.hasOption("n")){
                 n = Integer.parseInt(cmd.getOptionValue("n"));
+            }
+
+            if(cmd.hasOption("indexlocation")){
+                indexPath = cmd.getOptionValue("indexlocation");
             }
 
             if(cmd.hasOption("index")){
@@ -44,7 +56,7 @@ public class Main {
             if(cmd.hasOption("search")){
                 String searchQuery = cmd.getOptionValue("search");
                 System.out.println("Searching for: " + searchQuery);
-                Searcher indexSearcher = new Searcher();
+                Searcher indexSearcher = new Searcher(indexPath);
                 indexSearcher.search(searchQuery, n);
             }
 

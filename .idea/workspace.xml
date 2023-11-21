@@ -10,16 +10,9 @@
       <change beforePath="$PROJECT_DIR$/index/_0.cfs" beforeDir="false" afterPath="$PROJECT_DIR$/index/_0.cfs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index/_0.si" beforeDir="false" afterPath="$PROJECT_DIR$/index/_0.si" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index/segments_1" beforeDir="false" afterPath="$PROJECT_DIR$/index/segments_1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ro-stop-words.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/CustomAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/CustomAnalyzer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Indexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Indexer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/Searcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Searcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/CustomAnalyzer$DiacriticRemovalFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/CustomAnalyzer$DiacriticRemovalFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/CustomAnalyzer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/CustomAnalyzer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/Indexer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/Indexer$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/Indexer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/Indexer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/Searcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/Searcher.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +82,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Popescu_Luca_Project1" />
-      <option name="PROGRAM_PARAMETERS" value="-search &quot;România&quot; -n 2 -index " />
+      <option name="PROGRAM_PARAMETERS" value="-search România -n 2 -index -indexlocation index/" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -123,7 +116,7 @@
       <workItem from="1699477104832" duration="18132000" />
       <workItem from="1699717464511" duration="3706000" />
       <workItem from="1699790498136" duration="13422000" />
-      <workItem from="1700170033296" duration="31416000" />
+      <workItem from="1700170033296" duration="35758000" />
     </task>
     <servers />
   </component>

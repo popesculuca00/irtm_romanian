@@ -32,7 +32,13 @@ public class Searcher {
     }
 
     public Searcher(String indexPath) throws Exception{
-        this.indexPath = Paths.get(indexPath);
+        try {
+            this.indexPath = Paths.get(indexPath);
+        } catch(Exception e){
+            System.out.println("Invalid index directory, switching to default 'index'");
+            this.indexPath = Paths.get("index/");
+        }
+
         this.directory = FSDirectory.open(this.indexPath);
         this.reader = DirectoryReader.open(this.directory);
         this.analyzer = new CustomAnalyzer();
